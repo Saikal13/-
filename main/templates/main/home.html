@@ -1,0 +1,65 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="container">
+        <h1>Центр передовых технологий в области онкологии</h1>
+        <p>Точная диагностика, современное лечение, высокотехнологичная хирургия</p>
+        <a href="{% url 'appointment' %}" class="btn btn-primary">Записаться</a>
+    </div>
+</section>
+
+<section class="advantages">
+    <div class="container">
+        <ul>
+            <li>Партнёрство с Johns Hopkins Medicine — мировой лидер</li>
+            <li>Передовые технологии в лечении и хирургии</li>
+            <li>Аккредитация OECI</li>
+            <li>Бесплатное экспертное мнение за 48 часов</li>
+        </ul>
+    </div>
+</section>
+
+<section class="services">
+    <div class="container">
+        <h2>Наши услуги</h2>
+        <div class="services-grid">
+            {% for service in services %}
+            <div class="service-card">
+                <h3>{{ service.title }}</h3>
+                <p>{{ service.description }}</p>
+                <p>Цена: {{ service.price }} ₽</p>
+            </div>
+            {% empty %}
+            <p>Услуги пока не добавлены.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="doctors">
+    <div class="container">
+        <h2>Наши врачи</h2>
+        <div class="doctors-grid">
+            {% for doctor in doctors %}
+            <div class="doctor-card">
+                {% if doctor.photo %}
+                <img src="{{ doctor.photo.url }}" alt="{{ doctor.name }}">
+                {% else %}
+                <img src="{% static 'main/images/default-doctor.jpg' %}" alt="{{ doctor.name }}">
+                {% endif %}
+                <h3>{{ doctor.name }}</h3>
+                <p>{{ doctor.specialty }}</p>
+            </div>
+            {% empty %}
+            <p>Врачи пока не добавлены.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

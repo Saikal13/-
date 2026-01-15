@@ -1,0 +1,17 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Запись на приём{% endblock %}
+
+{% block content %}
+<section class="appointment">
+    <div class="container">
+        <h1>Записаться на приём</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Врачи{% endblock %}
+
+{% block content %}
+<section class="doctors">
+    <div class="container">
+        <h1>Наши врачи</h1>
+        <div class="doctors-grid">
+            {% for doctor in doctors %}
+            <div class="doctor-card">
+                {% if doctor.photo %}
+                <img src="{{ doctor.photo.url }}" alt="{{ doctor.name }}">
+                {% else %}
+                <img src="{% static 'main/images/default-doctor.jpg' %}" alt="{{ doctor.name }}">
+                {% endif %}
+                <h3>{{ doctor.name }}</h3>
+                <p>{{ doctor.specialty }}</p>
+            </div>
+            {% empty %}
+            <p>Врачи пока не добавлены.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
